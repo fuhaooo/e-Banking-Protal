@@ -1,0 +1,22 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Context.puml
+
+LAYOUT_WITH_LEGEND()
+
+title System Context Diagram for E-Banking System
+
+Person(customer, "Personal E-Banking Customer", "a customer of the bank with personal bank accounts")
+
+System(system, "E-Banking System", "Allows customers to log in and view information about their bank accounts")
+
+Rel(customer, system, "views money account transactions", "HTTPS")
+
+System_Ext(system1, "The Third-porry System", "provide the exchange rate on any given date")
+
+Rel(system, system1, "get the exchange rate from", "using API")
+
+System_Ext(system2, "Mainframe Banking System", "Stores all of the core banking information about customers,account,transactions")
+
+Rel(system, system2, "get account information from", "using API")
+@enduml
+

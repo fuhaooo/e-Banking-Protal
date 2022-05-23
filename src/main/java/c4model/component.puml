@@ -1,0 +1,40 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Component.puml
+
+title Component Diagram for E-Banking System
+
+Container(single,"Single-Page Application","Container:JavaScript and Angular","Provide the list of money account transactions")
+
+System_Boundary(item1, "E-Banking Portal"){
+    Component(sign, "Sign In Controller", "Allows users to sign in to E-Banking System")
+
+    Component(account, "Account Controller", "Allows users to ")
+
+    Component(security, "Security Component", "Provides functionality related to signing in")
+
+    Component(transaction, "Transaction Controller", "can list all recent account transactions of an account")
+
+}
+
+Rel(single, sign, "use", "HTTPS")
+
+Rel(single, account, "use", "HTTPS")
+
+Rel(sign, security, "use")
+
+ ComponentDb(db, "Database", "Microsoft SQL", "Stores user registration information,hashed authentication credentials,access logs")
+
+Rel(security, db, "read and write", "JDBC")
+
+Rel(account, transaction, "use")
+
+Container_Ext(rate, "The Third-porry System", "Container:Java","provide the exchange rate on any given date")
+
+Rel(transaction, rate, "use")
+
+Container_Ext(bank, "Mainframe Banking System", "Container:Java","Stores all of the core banking information about customers,account,transactions")
+
+Rel(transaction, bank, "use")
+
+
+@enduml

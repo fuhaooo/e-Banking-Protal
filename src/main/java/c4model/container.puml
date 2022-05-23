@@ -1,0 +1,33 @@
+@startuml
+!includeurl https://raw.githubusercontent.com/RicardoNiepel/C4-PlantUML/master/C4_Container.puml
+
+LAYOUT_WITH_LEGEND()
+
+title Container Diagram for E-Banking System
+
+Person(customer, "Personal E-Banking Customer", "a customer of the bank with personal bank accounts")
+
+Container(web, "Web Application", "Container:java and SpringMVC", "Delivers the static content and the Internet banking single page application")
+
+Rel(customer, web, "use", "HTTPS")
+
+Container(single,"Single-Page Application","Container:JavaScript and Angular","Provide the list of money account transactions")
+
+Rel_R(web, single, "delivers")
+
+Container(portal, "E-Banking Portal API Application", "Container:Java", "Provides reusable API for returning the paginated list of money account transactions")
+
+Rel(single, portal, "use", "HTTPS")
+
+ContainerDb(db, "Database", "Microsoft SQL", "Stores user registration information,hashed authentication credentials,access logs")
+
+Rel_L(portal, db, "read and write", "JDBC")
+
+Container_Ext(rate, "The Third-porry System", "Container:Java","provide the exchange rate on any given date")
+
+Rel(portal, rate, "use", "HTTPS")
+
+Container_Ext(bank, "Mainframe Banking System", "Container:Java","Stores all of the core banking information about customers,account,transactions")
+
+Rel_R(portal, bank, "use", "XML/HTTPS")
+@enduml
