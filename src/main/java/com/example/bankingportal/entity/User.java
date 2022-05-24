@@ -22,8 +22,14 @@ public class User {
      * 唯一标识符
      */
     private String id;
+
     /**
-     * IBAN id
+     * 用户名
      */
-    private String accountId;
+    private String username;
+
+    /**
+     * 密码
+     */
+    private String password;
 }

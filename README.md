@@ -25,3 +25,40 @@ And the E-Banking System need to get the exchange rate from the Third-porry Syst
 ![img.png](image/container.png)
 ### Component
 ![img.png](image/component.png)
+
+##表结构设计
+```SQL
+CREATE TABLE `e_banking_user` (
+  `user_id` varchar NOT NULL COMMENT '主键ID',
+  `username` varchar NOT NULL COMMENT '用户名',
+  `password` varchar NOT NULL COMMENT '密码',
+  `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '加入时间',
+  `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`user_id`),
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
+
+CREATE TABLE `account` (
+  `account_uuid` varchar NOT NULL COMMENT '主键ID',
+  `accountId` varchar NOT NULL COMMENT '银行账户ID',
+  `misidn` bigint NOT NULL COMMENT '电话号码',
+  `credit_balance` int NOT NULL DEFAULT '0' COMMENT '贷方余额',
+  `debit_balance` int NOT NULL DEFAULT '0' COMMENT '借方余额',
+  `currency` varchar NOT NULL COMMENT '货币种类',
+  `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '加入时间',
+  `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
+  PRIMARY KEY (`account_uuid`),
+  KEY `idx_misidn_id` (`accountId`,`misidn`) USING BTREE COMMENT '银行账户ID,电话号码联合索引'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账户表';
+```
+
+
+
+##CI/CD策略
+### Pipeline设计
+![](image/Pipeline.png)
+CI技术选型：CircleCI作为云服务，对开源项目免费，不需要再搭建CI系统，并且跟GitHub集成的较为紧密，其次circleCI在国外，推送镜像到DockerHub速度会比较快。Jenkins在本地部署的情况下，没有公网IP，代码的变更会通知不到，本地推送镜像会比较慢。
+
+CD技术选型：ArgoCD，面向K8s，支持GitOps的开源CD平台，可以追溯到历史的变更以及回滚，发布策略，更符合云原生交付理念。
+
+使用CircleCI实现自动集成功能
+![img.png](image/CircleCI.png)
