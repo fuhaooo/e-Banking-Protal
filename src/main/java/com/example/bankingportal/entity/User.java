@@ -1,9 +1,8 @@
 package com.example.bankingportal.entity;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.experimental.Accessors;
+
+import javax.persistence.*;
 
 /**
  * User
@@ -12,24 +11,34 @@ import lombok.experimental.Accessors;
  * @author fuhao
  * @date 2022/5/21
  */
+@Entity
+@Table(name = "e_banking_user")
 @Data
-@AllArgsConstructor
-@NoArgsConstructor
-@Accessors(chain = true)
 public class User {
 
     /**
-     * 唯一标识符
+     * 主键id
      */
-    private String id;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id")
+    private Integer id;
 
     /**
      * 用户名
      */
+    @Column(name = "username")
     private String username;
 
     /**
      * 密码
      */
+    @Column(name = "password")
     private String password;
+
+    /**
+     * 角色
+     */
+    @Column(name = "role")
+    private String role;
 }

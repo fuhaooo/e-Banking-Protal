@@ -26,12 +26,13 @@ And the E-Banking System need to get the exchange rate from the Third-porry Syst
 ### Component
 ![img.png](image/component.png)
 
-##表结构设计
+## 表结构设计
 ```SQL
 CREATE TABLE `e_banking_user` (
-  `user_id` varchar NOT NULL COMMENT '主键ID',
+  `user_id` int NOT NULL COMMENT '主键ID',
   `username` varchar NOT NULL COMMENT '用户名',
   `password` varchar NOT NULL COMMENT '密码',
+  `role` varchar NOT NULL COMMENT '角色',
   `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '加入时间',
   `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`user_id`),
@@ -53,7 +54,7 @@ CREATE TABLE `account` (
 
 
 
-##CI/CD策略
+## CI/CD策略
 ### Pipeline设计
 ![](image/Pipeline.png)
 CI技术选型：CircleCI作为云服务，对开源项目免费，不需要再搭建CI系统，并且跟GitHub集成的较为紧密，其次circleCI在国外，推送镜像到DockerHub速度会比较快。Jenkins在本地部署的情况下，没有公网IP，代码的变更会通知不到，本地推送镜像会比较慢。

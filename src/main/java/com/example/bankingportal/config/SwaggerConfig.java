@@ -29,8 +29,8 @@ public class SwaggerConfig {
                         .version("1.1.0")
                         // 开发文档的联系人
                         .contact(new Contact("Alfred", "https://www.synpulse.com/","fuhaojava@foxmail.com"))
-                        .license("规范")
-                        .licenseUrl("规范的URL")
+                        .license("API规范")
+                        .licenseUrl("API规范的URL")
                         .build());
     }
 }

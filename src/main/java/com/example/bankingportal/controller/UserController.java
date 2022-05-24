@@ -17,18 +17,18 @@ import java.util.List;
  * @date 2022/5/21
  */
 @RestController
-@RequestMapping("user")
+@RequestMapping("/user")
 @Api(tags = "用户服务相关接口")
 public class UserController {
 
-    @GetMapping("findAll")
+    @GetMapping("/findAll")
     @ApiOperation(value = "查询所有用户接口",notes = "<span style='color:red;'>接口描述:</span>&nbsp;&nbsp;用来查询所有用户信息")
     public String findAll(){
         String string = "查询所有transaction";
         return string;
     }
 
-    @PostMapping("save")
+    @PostMapping("/save")
     @ApiOperation(value = "保存用户接口",notes = "<span style='color:red;'>接口描述:</span>&nbsp;&nbsp;保存用户信息")
     @ApiResponses({
             @ApiResponse(code = 401, message = "当前请求未被授权"),
