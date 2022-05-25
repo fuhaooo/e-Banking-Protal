@@ -37,19 +37,6 @@ CREATE TABLE `e_banking_user` (
   `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
   PRIMARY KEY (`user_id`),
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='用户信息表';
-
-CREATE TABLE `account` (
-  `account_uuid` varchar NOT NULL COMMENT '主键ID',
-  `accountId` varchar NOT NULL COMMENT '银行账户ID',
-  `misidn` bigint NOT NULL COMMENT '电话号码',
-  `credit_balance` int NOT NULL DEFAULT '0' COMMENT '贷方余额',
-  `debit_balance` int NOT NULL DEFAULT '0' COMMENT '借方余额',
-  `currency` varchar NOT NULL COMMENT '货币种类',
-  `gmt_create` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP COMMENT '加入时间',
-  `gmt_modify` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP COMMENT '更新时间',
-  PRIMARY KEY (`account_uuid`),
-  KEY `idx_misidn_id` (`accountId`,`misidn`) USING BTREE COMMENT '银行账户ID,电话号码联合索引'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='账户表';
 ```
 
 

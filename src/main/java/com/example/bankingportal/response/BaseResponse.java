@@ -1,5 +1,10 @@
 package com.example.bankingportal.response;
 
+import lombok.Data;
+import org.springframework.http.HttpStatus;
+
+import java.util.List;
+
 /**
  * BaseResponse
  * API接口基础返回类
@@ -7,7 +12,8 @@ package com.example.bankingportal.response;
  * @author fuhao
  * @date 2022/5/23
  */
-public class BaseResponse<T> {
+@Data
+public class BaseResponse {
 
     /**
      * 是否成功
@@ -22,15 +28,11 @@ public class BaseResponse<T> {
     /**
      * 返回数据
      */
-    private T data;
+    private List<?> data;
 
-    public BaseResponse() {
-
-    }
-
-    public BaseResponse(boolean success, String msg, T data) {
+    public BaseResponse(boolean success, String msg, List<TransactionResponse> responseList) {
         this.success = success;
         this.msg = msg;
-        this.data = data;
+        this.data = responseList;
     }
 }
